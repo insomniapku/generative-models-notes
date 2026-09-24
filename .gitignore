@@ -1,0 +1,6 @@
+_work/
+*.pdf
+*.ppt
+*.pptx
+.DS_Store
+Thumbs.db
