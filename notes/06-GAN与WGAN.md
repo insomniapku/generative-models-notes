@@ -5,7 +5,7 @@
 一维情形下，若分布的累积分布函数为 $F$，取
 
 $$
-U\sim\operatorname{Uniform}(0,1),\qquad X=F^{-1}(U),
+U\sim\mathrm{Uniform}(0,1),\qquad X=F^{-1}(U),
 $$
 
 则
@@ -64,7 +64,7 @@ $$
 固定 $G$ 后，对每个 $x$ 的最优判别器满足
 
 $$
-D^*(x)=\frac{p_{\text{data}}(x)}{p_{\text{data}}(x)+p_g(x)}.
+D^{\ast}(x)=\frac{p_{\text{data}}(x)}{p_{\text{data}}(x)+p_g(x)}.
 $$
 
 代回可得目标与 $D_{\mathrm{JS}}(p_{\text{data}}\|p_g)$ 相差常数，因此理想的内层判别器把生成器训练转化为最小化 JS 散度。
@@ -138,7 +138,7 @@ $$
 
 $$
 \hat x=\epsilon x+(1-\epsilon)\tilde x,
-\quad \epsilon\sim\operatorname{Uniform}(0,1),
+\quad \epsilon\sim\mathrm{Uniform}(0,1),
 $$
 
 其中 $x$ 为真实样本，$\tilde x=G(z)$ 为生成样本。

@@ -35,7 +35,7 @@ $$
 VAE 把编码器改为近似后验 $q_\phi(z\mid x)$，把解码器解释为似然 $p_\theta(x\mid z)$，并指定简单先验 $p(z)=\mathcal N(0,I)$。常用对角高斯编码器：
 
 $$
-q_\phi(z\mid x)=\mathcal N\!\left(z;\mu_\phi(x),\operatorname{diag}(\sigma_\phi^2(x))\right).
+q_\phi(z\mid x)=\mathcal N\!\left(z;\mu_\phi(x),\mathrm{diag}(\sigma_\phi^2(x))\right).
 $$
 
 ![VAE 编码器采样并送入解码器的结构（原课件第 90 页）](../assets/03-autoencoders/vae-architecture.png)
@@ -124,8 +124,8 @@ $$
 对每个空间位置选择最近码字：
 
 $$
-k^*=\arg\min_k\lVert z_e(x)-e_k\rVert_2,
-\qquad z_q(x)=e_{k^*}.
+k^{\ast}=\arg\min_k\lVert z_e(x)-e_k\rVert_2,
+\qquad z_q(x)=e_{k^{\ast}}.
 $$
 
 > 课件文字提取中该处出现 `argmax`，结合“nearest code”和标准 VQ-VAE 定义，应为上式的 `argmin`。
@@ -133,18 +133,18 @@ $$
 最近邻选择不可微。直通估计器写成
 
 $$
-z_{\text{st}}=z_e+\operatorname{sg}(z_q-z_e),
+z_{\text{st}}=z_e+\mathrm{sg}(z_q-z_e),
 $$
 
-其中 $\operatorname{sg}$ 表示停止梯度。前向数值等于 $z_q$，反向对 $z_e$ 的导数视为恒等映射。
+其中 $\mathrm{sg}$ 表示停止梯度。前向数值等于 $z_q$，反向对 $z_e$ 的导数视为恒等映射。
 
 典型损失为
 
 $$
 \mathcal L
 =\underbrace{\lVert x-D(z_q)\rVert_2^2}_{\text{重建}}
-+\underbrace{\lVert\operatorname{sg}[z_e]-e\rVert_2^2}_{\text{更新码本}}
-+\underbrace{\beta\lVert z_e-\operatorname{sg}[e]\rVert_2^2}_{\text{commitment}}.
++\underbrace{\lVert\mathrm{sg}[z_e]-e\rVert_2^2}_{\text{更新码本}}
++\underbrace{\beta\lVert z_e-\mathrm{sg}[e]\rVert_2^2}_{\text{commitment}}.
 $$
 
 最后一项防止编码器输出任意漂移，迫使其靠近所选码字。

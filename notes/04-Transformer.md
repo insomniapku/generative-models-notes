@@ -27,8 +27,8 @@ $$
 矩阵形式：
 
 $$
-\operatorname{Attention}(Q,K,V)
-=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.
+\mathrm{Attention}(Q,K,V)
+=\mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.
 $$
 
 ### 为什么除以 $\sqrt{d_k}$
@@ -36,8 +36,8 @@ $$
 若 $q_i,k_j$ 的各维独立、均值为 0、方差为 1，则
 
 $$
-\operatorname{Var}(q_i k_j^\top)
-=\operatorname{Var}\!\left(\sum_{r=1}^{d_k}q_{ir}k_{jr}\right)=d_k.
+\mathrm{Var}(q_i k_j^\top)
+=\mathrm{Var}\!\left(\sum_{r=1}^{d_k}q_{ir}k_{jr}\right)=d_k.
 $$
 
 维数增大时，未缩放的 logits 会变大，使 softmax 过度饱和、梯度变小。除以 $\sqrt{d_k}$ 后方差恢复到约 1。
@@ -47,13 +47,13 @@ $$
 多头注意力在不同子空间独立计算注意力：
 
 $$
-\operatorname{head}_h
-=\operatorname{Attention}(XW_Q^h,XW_K^h,XW_V^h),
+\mathrm{head}_h
+=\mathrm{Attention}(XW_Q^h,XW_K^h,XW_V^h),
 $$
 
 $$
-\operatorname{MHA}(X)
-=\operatorname{Concat}(\operatorname{head}_1,\ldots,\operatorname{head}_H)W_O.
+\mathrm{MHA}(X)
+=\mathrm{Concat}(\mathrm{head}_1,\ldots,\mathrm{head}_H)W_O.
 $$
 
 不同头可学习不同依赖模式。实现时通常将头维并入 batch，以批量矩阵乘法计算 $QK^\top$，在 softmax 前加入掩码：
@@ -70,7 +70,7 @@ $$
 注意力负责“收集/组织信息”，位置前馈网络负责逐位置加工：
 
 $$
-\operatorname{FFN}(z_i)=W_2\,\sigma(W_1z_i+b_1)+b_2,
+\mathrm{FFN}(z_i)=W_2\,\sigma(W_1z_i+b_1)+b_2,
 $$
 
 其中隐藏层通常比模型维度宽，激活函数常用 GeLU。每个位置共享同一组 FFN 参数，但彼此独立计算。
@@ -84,18 +84,18 @@ $$
 使深层网络保留恒等路径。LayerNorm 对每个样本、每个序列位置的 embedding 维做归一化：
 
 $$
-\operatorname{LN}(x)
+\mathrm{LN}(x)
 =\gamma\odot\frac{x-\mu}{\sqrt{\sigma^2+\epsilon}}+\beta.
 $$
 
 ### Post-LN 与 Pre-LN
 
 $$
-\text{Post-LN: }x\leftarrow\operatorname{LN}(x+\operatorname{Sublayer}(x)),
+\text{Post-LN: }x\leftarrow\mathrm{LN}(x+\mathrm{Sublayer}(x)),
 $$
 
 $$
-\text{Pre-LN: }x\leftarrow x+\operatorname{Sublayer}(\operatorname{LN}(x)).
+\text{Pre-LN: }x\leftarrow x+\mathrm{Sublayer}(\mathrm{LN}(x)).
 $$
 
 Pre-LN 通常在网络末端再做一次 LayerNorm。课件指出：Post-LN 的深层梯度更不均衡，对学习率和 warm-up 敏感；Pre-LN 的恒等残差通路使训练更稳定。
