@@ -147,13 +147,13 @@ $$
 
 ```mermaid
 flowchart LR
-    P[真实分布 P] --> M[选择分布度量]
-    Q[生成分布 Qθ] --> M
-    M --> FD[f-散度]
-    M --> IPM[IPM / Wasserstein]
-    FD --> GAN[判别器估计密度比<br/>原始 GAN]
-    IPM --> WGAN[1-Lipschitz critic<br/>WGAN]
-    GAN --> B[交替/双层优化]
+    P["真实分布 P"] --> M["选择分布度量"]
+    Q["生成分布 Qθ"] --> M
+    M --> FD["f-散度"]
+    M --> IPM["IPM / Wasserstein"]
+    FD --> GAN["判别器估计密度比<br/>原始 GAN"]
+    IPM --> WGAN["1-Lipschitz critic<br/>WGAN"]
+    GAN --> B["交替/双层优化"]
     WGAN --> B
 ```
 

@@ -157,11 +157,11 @@ $$
 
 ```mermaid
 flowchart LR
-    X[输入 x] --> AE[AE：压缩再重建]
-    X --> VAE[VAE：高斯后验 + ELBO]
-    X --> DAE[DAE：破坏后复原]
-    X --> VQ[VQ-VAE：最近码字量化]
-    VAE --> Z1[连续、可采样潜空间]
-    DAE --> Z2[鲁棒自监督表示]
-    VQ --> Z3[离散 token 序列]
+    X["输入 x"] --> AE["AE：压缩再重建"]
+    X --> VAE["VAE：高斯后验 + ELBO"]
+    X --> DAE["DAE：破坏后复原"]
+    X --> VQ["VQ-VAE：最近码字量化"]
+    VAE --> Z1["连续、可采样潜空间"]
+    DAE --> Z2["鲁棒自监督表示"]
+    VQ --> Z3["离散 token 序列"]
 ```

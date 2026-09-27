@@ -155,15 +155,15 @@ $$
 
 ```mermaid
 flowchart LR
-    X[词向量 + 位置信息] --> LN1[LayerNorm]
-    LN1 --> MHA[多头自注意力]
-    X --> ADD1((+))
+    X["词向量 + 位置信息"] --> LN1["LayerNorm"]
+    LN1 --> MHA["多头自注意力"]
+    X --> ADD1(("+"))
     MHA --> ADD1
-    ADD1 --> LN2[LayerNorm]
-    LN2 --> FFN[逐位置 FFN]
-    ADD1 --> ADD2((+))
+    ADD1 --> LN2["LayerNorm"]
+    LN2 --> FFN["逐位置 FFN"]
+    ADD1 --> ADD2(("+"))
     FFN --> ADD2
-    ADD2 --> Y[下一层表示]
+    ADD2 --> Y["下一层表示"]
 ```
 
 上图为 Pre-LN 版本。若用于自回归语言模型，MHA 还必须加入因果掩码；训练与推理细节见下一章。

@@ -18,18 +18,18 @@
 
 ```mermaid
 flowchart LR
-    D[训练数据] --> AE[自编码器家族]
-    D --> AR[自回归模型]
-    D --> GAN[GAN / WGAN]
-    D --> NF[归一化流]
-    D --> DM[扩散 / Score 模型]
-    AE --> VAE[VAE：显式潜变量与变分下界]
-    AE --> DAE[DAE：去噪表征学习]
-    AE --> VQ[VQ-VAE：离散视觉 token]
-    AR --> A1[精确似然，顺序生成]
-    GAN --> G1[隐式分布，对抗距离]
-    NF --> F1[可逆映射，精确似然]
-    DM --> S1[逐步去噪，学习 score]
+    D["训练数据"] --> AE["自编码器家族"]
+    D --> AR["自回归模型"]
+    D --> GAN["GAN / WGAN"]
+    D --> NF["归一化流"]
+    D --> DM["扩散 / Score 模型"]
+    AE --> VAE["VAE：显式潜变量与变分下界"]
+    AE --> DAE["DAE：去噪表征学习"]
+    AE --> VQ["VQ-VAE：离散视觉 token"]
+    AR --> A1["精确似然，顺序生成"]
+    GAN --> G1["隐式分布，对抗距离"]
+    NF --> F1["可逆映射，精确似然"]
+    DM --> S1["逐步去噪，学习 score"]
 ```
 
 ## 阅读约定
