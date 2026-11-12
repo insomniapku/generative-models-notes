@@ -64,7 +64,50 @@ $$
 
 该积分通常不可解。新版课件第 106–110 页用“给定样本仅在部分潜变量区域有较大贡献”帮助理解积分难度，并明确标注这只是直觉、并非普遍成立的结论。高斯密度一般不会在其余区域严格为零，不能据此把积分精确截断。
 
-引入 $q_\phi(z\mid x)$ 后：
+引入编码器给出的近似后验 $q_\phi(z\mid x)$，可以得到 ELBO 分解。这里需要区分三个分布：
+
+- $p(z)$ 是生成模型指定的先验，通常为标准正态；
+- $p_\theta(z\mid x)$ 是看到 $x$ 后的真实后验，通常难以直接计算；
+- $q_\phi(z\mid x)$ 是编码器给出的近似后验，用来逼近真实后验。
+
+下面固定一个样本 $x$，将 $\mathbb E_{q_\phi(z\mid x)}$ 简写为 $\mathbb E_q$。推导的关键是贝叶斯公式和 KL 散度的定义。
+
+先由贝叶斯公式写出真实后验：
+
+$$
+p_\theta(z\mid x)
+=\frac{p_\theta(x\mid z)p(z)}{p_\theta(x)}.
+$$
+
+两边取对数，得到
+
+$$
+\log p_\theta(z\mid x)
+=\log p_\theta(x\mid z)+\log p(z)-\log p_\theta(x).
+$$
+
+再从近似后验与真实后验之间的 KL 出发，代入上式：
+
+$$
+\begin{aligned}
+D_{\mathrm{KL}}\!\left(q_\phi(z\mid x)\,\|\,p_\theta(z\mid x)\right)
+&=\mathbb E_q\!\left[
+\log q_\phi(z\mid x)-\log p_\theta(z\mid x)
+\right]\\
+&=\mathbb E_q\!\left[
+\log q_\phi(z\mid x)-\log p(z)
+\right]\\
+&\quad-\mathbb E_q[\log p_\theta(x\mid z)]
++\log p_\theta(x)\\
+&=D_{\mathrm{KL}}\!\left(q_\phi(z\mid x)\,\|\,p(z)\right)
+-\mathbb E_q[\log p_\theta(x\mid z)]
++\log p_\theta(x).
+\end{aligned}
+$$
+
+其中 $x$ 已固定，$\log p_\theta(x)$ 与期望中的变量 $z$ 无关；由于 $\int q_\phi(z\mid x)\,dz=1$，所以 $\mathbb E_q[\log p_\theta(x)]=\log p_\theta(x)$。第一组期望则正好是 $D_{\mathrm{KL}}(q_\phi(z\mid x)\|p(z))$。
+
+将上式移项，并把“重建期望减去与先验的 KL”定义为 $\mathcal L_{\text{ELBO}}(x)$，就得到
 
 $$
 \begin{aligned}
@@ -77,10 +120,14 @@ $$
 \end{aligned}
 $$
 
-KL 非负，因此 ELBO 是 $log p_\theta(x)$ 的下界。最大化 ELBO 等价于同时：
+这个分解是精确恒等式。KL 非负，因此 ELBO 是 $\log p_\theta(x)$ 的下界；当近似后验与真实后验一致时，二者之间的 KL 为零，下界取到等号。
+
+注意两个 KL 的作用不同：$D_{\mathrm{KL}}(q_\phi(z\mid x)\|p_\theta(z\mid x))$ 是 ELBO 与对数边缘似然之间的差距，衡量后验近似误差；$D_{\mathrm{KL}}(q_\phi(z\mid x)\|p(z))$ 则是 ELBO 内部的正则项，约束编码分布接近先验。
+
+最大化 ELBO 在下面两个目标之间做权衡，并不保证每次参数更新都让两项同时改善：
 
 - 提高重建项，使 $z$ 能解释 $x$；
-- 减小后验与先验的 KL，使潜空间连续、可从先验采样。
+- 减小近似后验与先验的 KL，鼓励编码分布与可采样的先验对齐。
 
 对角高斯到标准正态的 KL 可以先从一维情况推导。固定样本 $x$，省略编码分布对 $x$ 和参数 $\phi$ 的依赖，记 $q(z)=\mathcal N(z;\mu,\sigma^2)$、$p(z)=\mathcal N(z;0,1)$，其中 $\sigma>0$。
 
