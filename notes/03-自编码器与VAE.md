@@ -82,7 +82,67 @@ KL 非负，因此 ELBO 是 $log p_\theta(x)$ 的下界。最大化 ELBO 等价�
 - 提高重建项，使 $z$ 能解释 $x$；
 - 减小后验与先验的 KL，使潜空间连续、可从先验采样。
 
-对角高斯到标准正态的 KL 有闭式：
+对角高斯到标准正态的 KL 可以先从一维情况推导。固定样本 $x$，省略编码分布对 $x$ 和参数 $\phi$ 的依赖，记 $q(z)=\mathcal N(z;\mu,\sigma^2)$、$p(z)=\mathcal N(z;0,1)$，其中 $\sigma>0$。
+
+首先写出两个高斯的概率密度：
+
+$$
+q(z)=\frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\!\left(-\frac{(z-\mu)^2}{2\sigma^2}\right),
+\qquad
+p(z)=\frac{1}{\sqrt{2\pi}}
+\exp\!\left(-\frac{z^2}{2}\right).
+$$
+
+密度相除时，归一化系数相除，指数部分相减：
+
+$$
+\begin{aligned}
+\frac{q(z)}{p(z)}
+&=\frac{\sqrt{2\pi}}{\sqrt{2\pi\sigma^2}}
+\exp\!\left(
+-\frac{(z-\mu)^2}{2\sigma^2}-\left(-\frac{z^2}{2}\right)
+\right)\\
+&=\frac{1}{\sqrt{\sigma^2}}
+\exp\!\left(-\frac{(z-\mu)^2}{2\sigma^2}+\frac{z^2}{2}\right).
+\end{aligned}
+$$
+
+再利用 $\log(ab)=\log a+\log b$、$\log(e^a)=a$ 和 $\log((\sigma^2)^{-1/2})=-\tfrac12\log\sigma^2$，得到
+
+$$
+\log\frac{q(z)}{p(z)}
+=-\frac12\log\sigma^2
+-\frac{(z-\mu)^2}{2\sigma^2}
++\frac{z^2}{2}.
+$$
+
+其中第一项来自归一化系数，最后一项为正，是因为相除时要减去 $p(z)$ 中原本为负的指数 $-z^2/2$。
+
+按照 KL 的定义，还需要在 $q$ 下取期望。由高斯的均值与方差可知
+
+$$
+\mathbb E_q[(z-\mu)^2]=\sigma^2,
+\qquad
+\mathbb E_q[z^2]
+=\operatorname{Var}_q(z)+(\mathbb E_q[z])^2
+=\sigma^2+\mu^2.
+$$
+
+因此一维 KL 为
+
+$$
+\begin{aligned}
+D_{\mathrm{KL}}(q\|p)
+&=\mathbb E_q\!\left[\log\frac{q(z)}{p(z)}\right]\\
+&=-\frac12\log\sigma^2
+-\frac{\sigma^2}{2\sigma^2}
++\frac{\sigma^2+\mu^2}{2}\\
+&=\frac12\left(\mu^2+\sigma^2-\log\sigma^2-1\right).
+\end{aligned}
+$$
+
+对于多维对角高斯 $q_\phi(z\mid x)=\prod_j q_j(z_j)$，标准正态先验同样满足 $p(z)=\prod_j p_j(z_j)$。乘积的对数变成求和，因此整体 KL 等于各维 KL 之和：
 
 $$
 D_{\mathrm{KL}}(q_\phi(z\mid x)\|\mathcal N(0,I))
