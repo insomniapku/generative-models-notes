@@ -10,9 +10,9 @@
 
 自回归语言模型学习
 
-$$
+```math
 p_\theta(x_1,\ldots,x_T)=\prod_{t=1}^{T}p_\theta(x_t\mid x_{\lt t}).
-$$
+```
 
 这首先是一种续写能力。给模型“登月是……”的开头，它可以继续百科文章；给它“用几句话向六岁孩子解释登月”，合适的行为却是回答问题，而不是继续列出类似问题。课件展示的未对齐模型正会出现后者。
 
@@ -32,10 +32,10 @@ BERT 提供了通用范式：先在海量未标注文本上做掩码词预测，
 
 若预训练参数为 $\theta_{\mathrm{pt}}$，下游优化是
 
-$$
+```math
 \min_\theta\frac1N\sum_{i=1}^N\ell(f_\theta(x_i),y_i),
 \qquad\theta\leftarrow\theta_{\mathrm{pt}}\quad\text{作为初始化}.
-$$
+```
 
 写成 $\theta=\theta_{\mathrm{pt}}+\Delta\theta$，强调微调是在已有表示和知识上适配，而非重新从随机参数学习。预测缺失词或下一个词需要理解上下文：天空的颜色涉及事实，雨天撑伞涉及常识，两颗糖涉及简单数量关系。但这只是解释预训练为什么有帮助，不保证模型真正学会所有推理规则。
 
@@ -59,11 +59,11 @@ $$
 
 初始化于预训练检查点，以较小学习率优化下一个 token 的预测。对指令 $q$ 与目标回答 $s=(s_1,\ldots,s_T)$，通常可写为
 
-$$
+```math
 \mathcal L_{\mathrm{SFT}}(\theta)
 =-\mathbb E_{(q,s)\sim D}\sum_{t=1}^{T}
 \log p_\theta(s_t\mid q,s_{\lt t}).
-$$
+```
 
 这仍是 teacher forcing：训练时条件中使用真实前缀，而不是让每个前缀都由模型自己生成。每个目标 token 都有直接监督信号。实际实现是否对提示词也计算损失取决于数据管线；上式采用只监督回答的常见写法，不声称课件规定了唯一掩码方案。
 
@@ -79,9 +79,9 @@ $$
 
 希望提高的是期望奖励：
 
-$$
+```math
 J(\theta)=\mathbb E_{q\sim D}\mathbb E_{s\sim p_\theta(\cdot\mid q)}[R(q,s)].
-$$
+```
 
 难点不只是“没有奖励梯度”。输出 token 是离散采样结果，不能直接通过普通链式法则把 $\partial R/\partial s$ 沿采样操作传回参数。策略梯度通过改变各输出的概率解决这个问题，不需要奖励函数对输出可微。
 
@@ -89,7 +89,7 @@ $$
 
 为简化记号，先固定 $q$，写 $p_\theta(s)$ 和 $R(s)$。假定奖励在本次策略更新中固定，并允许交换求导与求和：
 
-$$
+```math
 \begin{aligned}
 \nabla_\theta J(\theta)
 &=\nabla_\theta\sum_s p_\theta(s)R(s)\\
@@ -97,16 +97,16 @@ $$
 &=\sum_s p_\theta(s)\nabla_\theta\log p_\theta(s)R(s)\\
 &=\mathbb E_{s\sim p_\theta}[R(s)\nabla_\theta\log p_\theta(s)].
 \end{aligned}
-$$
+```
 
 核心恒等式是 $\nabla p=p\nabla\log p$，通常称为 log-derivative trick。它把“对采样分布的期望求导”转成可用样本估计的梯度。
 
 从当前策略采样 $K$ 个回答，得到
 
-$$
+```math
 \widehat g=\frac1K\sum_{k=1}^K R(s_k)\nabla_\theta\log p_\theta(s_k),
 \qquad\theta\leftarrow\theta+\alpha\widehat g.
-$$
+```
 
 这是**梯度上升**。正奖励样本对提高自身对数概率有正向贡献，负奖励相反；参数共享意味着不能据此保证每条样本概率在整体更新后都单调变化。
 
@@ -114,18 +114,18 @@ $$
 
 可以最大化采样后的代理目标
 
-$$
+```math
 \widehat L_{\mathrm{RF}}(\theta)
-=\frac1K\sum_k\log p_\theta(s_k)\,\operatorname{stopgrad}(R(s_k)).
-$$
+=\frac1K\sum_k\log p_\theta(s_k)\,\mathrm{stopgrad}(R(s_k)).
+```
 
 若优化器默认最小化，则使用 $-\widehat L_{\mathrm{RF}}$。奖励应视为固定系数，不能把奖励模型的计算图意外接入策略梯度。
 
 **补充解释：序列概率。** 自回归模型有
 
-$$
+```math
 \log p_\theta(s\mid q)=\sum_{t=1}^{T}\log p_\theta(s_t\mid q,s_{\lt t}).
-$$
+```
 
 应在 log 空间求和，正确屏蔽 padding，并明确是否包含终止 token；不能把整条序列概率直接连乘后再取对数。若把 token 求和换成按长度平均，实际上改变了不同长度回答的权重，需要明确这是额外设计而非等价实现。
 
@@ -133,18 +133,18 @@ $$
 
 若两个回答奖励分别为 2 和 5，原始 REINFORCE 对两者都有正向贡献。取基线 $b=3$，定义优势
 
-$$
+```math
 A(q,s)=R(q,s)-b(q),
-$$
+```
 
 就得到 $A_1=-1$、$A_2=2$，使更新表达相对质量。
 
 对固定提示，若基线不依赖本次采样动作，
 
-$$
+```math
 \mathbb E_{s\sim p_\theta}[b(q)\nabla_\theta\log p_\theta(s\mid q)]
 =b(q)\nabla_\theta\sum_s p_\theta(s\mid q)=0.
-$$
+```
 
 因此用 $A$ 替代 $R$ 不改变真实期望梯度；合理选择基线可降低方差。并非任意基线都会降低方差，且该证明不适用于任意依赖当前回答的基线。
 
@@ -156,17 +156,17 @@ $$
 
 保存旧策略 $p_{\mathrm{old}}$，从它采样 $s_k$；更新时固定回答、奖励、基线和旧概率。定义
 
-$$
+```math
 \rho_\theta(s)=\frac{p_\theta(s)}{p_{\mathrm{old}}(s)}.
-$$
+```
 
 例如旧概率 0.2、新概率 0.3，比例为 1.5。若旧分布在所需样本上具有支持，则
 
-$$
+```math
 \mathbb E_{s\sim p_\theta}[A(s)\nabla\log p_\theta(s)]
 =\mathbb E_{s\sim p_{\mathrm{old}}}
 [\rho_\theta(s)A(s)\nabla\log p_\theta(s)].
-$$
+```
 
 推导仅需在求和中乘除 $p_{\mathrm{old}}(s)$。这校正了采样分布，不等于保证有限样本估计低方差；新旧分布差异大时估计会非常不稳定。
 
@@ -174,16 +174,16 @@ $$
 
 对固定旧样本，最大化
 
-$$
+```math
 \widehat L_{\mathrm{IS}}(\theta)=\frac1K\sum_k\rho_\theta(s_k)A_k.
-$$
+```
 
 因为旧概率固定，
 
-$$
+```math
 \nabla_\theta\rho_\theta(s)
 =\rho_\theta(s)\nabla_\theta\log p_\theta(s).
-$$
+```
 
 只让分子参与优化。若把 $\rho A\log p$ 作为代理目标，同时又让 $\rho$ 和 $\log p$ 都参与反向传播，会多出一项，不再是希望实现的梯度。实现时应直接使用 $\rho A$，或在采用其他等价梯度构造时明确断开哪些量。
 
@@ -195,11 +195,11 @@ $$
 
 课件先用单独裁剪引出思路，再给出最终的 PPO clipped objective：
 
-$$
+```math
 L^{\mathrm{CLIP}}(\theta)=\frac1K\sum_k
 \min\left(\rho_k A_k,
-\operatorname{clip}(\rho_k,1-\epsilon,1+\epsilon)A_k\right).
-$$
+\mathrm{clip}(\rho_k,1-\epsilon,1+\epsilon)A_k\right).
+```
 
 ![从REINFORCE逐步加入基线、复用采样与裁剪（课件第127页）](../assets/07-rlhf/page-127.png)
 
@@ -229,16 +229,16 @@ $$
 
 用提示与回答的隐藏表示 $h_\phi(q,s)$ 接一个标量头：
 
-$$
+```math
 r_\phi(q,s)=w^\top h_\phi(q,s)+c.
-$$
+```
 
 收集人类偏好对 $(q,s^+,s^-)$，其中 $s^+$ 更受偏好。常用成对损失为
 
-$$
+```math
 \mathcal L_{\mathrm{RM}}(\phi)
 =-\frac1N\sum_i\log\sigma\left(r_\phi(q_i,s_i^+)-r_\phi(q_i,s_i^-)\right).
-$$
+```
 
 ![偏好对、标量奖励与奖励模型训练目标（课件第133页）](../assets/07-rlhf/page-133.png)
 
@@ -266,19 +266,19 @@ $$
 
 把每个 token 视为动作，前缀为状态：
 
-$$
+```math
 h_t=(q,s_{\lt t}),\qquad
 \rho_t(\theta)=\frac{p_\theta(s_t\mid h_t)}{p_{\mathrm{old}}(s_t\mid h_t)}.
-$$
+```
 
 课件简化版本用终端奖励分配到每步，$A_t=R(q,s)-b(q)$，没有 critic。采样时保存 token、mask 与旧 log probability，然后对每个 token 的比例分别裁剪。
 
 逐 token 裁剪不同于整序列比例裁剪，因为
 
-$$
+```math
 \rho_{\mathrm{seq}}=\prod_t\rho_t,
 \qquad\log\rho_{\mathrm{seq}}=\sum_t\log\rho_t.
-$$
+```
 
 即使每步变化不大，长序列整体比值也可能显著变化。真实 actor–critic 系统可以进一步引入价值函数和优势估计，但不应把这些细节误归入本课件的无 critic 简化式。
 
@@ -288,10 +288,10 @@ $$
 
 扩散轨迹为 $x_T\to x_{T-1}\to\cdots\to x_0$。在当前状态 $(x_t,q,t)$ 下，把采样下一状态 $x_{t-1}$ 当作动作，设
 
-$$
+```math
 p_\theta(x_{t-1}\mid x_t,q)
 =\mathcal N(\mu_\theta(x_t,q,t),\sigma_t^2I).
-$$
+```
 
 网络可以预测噪声或 velocity，再由调度器换算均值 $\mu_\theta$。最终图像获得奖励，并用于更新生成轨迹的概率。
 
@@ -301,18 +301,18 @@ $$
 
 固定同一条采样转移，在新旧策略下分别评估密度：
 
-$$
+```math
 \rho_t=\frac{p_\theta(x_{t-1}\mid x_t,q)}{p_{\mathrm{old}}(x_{t-1}\mid x_t,q)}
 =\exp(\log p_\theta-\log p_{\mathrm{old}}).
-$$
+```
 
 若两者方差相同，则归一化常数抵消：
 
-$$
+```math
 \log\rho_t=
 \frac{\|x_{t-1}-\mu_{\mathrm{old}}\|^2-
 \|x_{t-1}-\mu_\theta\|^2}{2\sigma_t^2}.
-$$
+```
 
 ![高斯去噪转移的概率比，范数对全部潜变量坐标求和（课件第139页）](../assets/07-rlhf/page-139.png)
 

@@ -5,21 +5,21 @@
 
 一维情形下，若分布的累积分布函数为 $F$，取
 
-$$
+```math
 U\sim\mathrm{Uniform}(0,1),\qquad X=F^{-1}(U),
-$$
+```
 
 则
 
-$$
+```math
 \Pr(X\lt t)=\Pr(U\lt F(t))=F(t),
-$$
+```
 
 故 $X$ 服从目标分布。高维复杂数据难以直接构造 $F^{-1}$，GAN 用神经网络 $G_\theta$ 学习从简单噪声到数据的映射：
 
-$$
+```math
 z\sim p(z),\qquad x=G_\theta(z).
-$$
+```
 
 此时可采样，却通常无法显式计算 $p_\theta(x)$，所以称为隐式生成模型。显式模型可以评估密度并进行标准最大似然训练；隐式模型需要通过样本来比较分布。
 
@@ -27,28 +27,29 @@ $$
 
 对凸函数 $f$ 且 $f(1)=0$，定义
 
-$$
+```math
 D_f(P\|Q)=\int q(x)f\!\left(\frac{p(x)}{q(x)}\right)dx
 =\mathbb E_{x\sim Q}\left[f\!\left(\frac{p(x)}{q(x)}\right)\right].
-$$
+```
 
 由 Jensen 不等式：
 
-$$
+```math
 D_f(P\|Q)\ge
 f\!\left(\mathbb E_Q\frac{p(x)}{q(x)}\right)
 =f(1)=0.
-$$
+```
 
 常见实例：
 
 - $f(t)=t\log t$：$D_{\mathrm{KL}}(P\|Q)$；
 - $f(t)=\frac12|t-1|$：总变差距离；
 - Jensen-Shannon 散度：令 $M=(P+Q)/2$，
-  $$
+
+  ```math
   D_{\mathrm{JS}}(P\|Q)=\tfrac12D_{\mathrm{KL}}(P\|M)
   +\tfrac12D_{\mathrm{KL}}(Q\|M).
-  $$
+  ```
 
 不同资料可能把 JS 的 $1/2$ 因子吸收到定义中，数值缩放不同但优化结论不变。
 
@@ -56,17 +57,17 @@ $$
 
 判别器 $D(x)\in(0,1)$ 估计样本来自真实数据的概率。原始目标为
 
-$$
+```math
 \min_G\max_D V(D,G)
 =\mathbb E_{x\sim p_{\text{data}}}\log D(x)
 +\mathbb E_{z\sim p(z)}\log\bigl(1-D(G(z))\bigr).
-$$
+```
 
 固定 $G$ 后，对每个 $x$ 的最优判别器满足
 
-$$
+```math
 D^{\ast}(x)=\frac{p_{\text{data}}(x)}{p_{\text{data}}(x)+p_g(x)}.
-$$
+```
 
 代回可得目标与 $D_{\mathrm{JS}}(p_{\text{data}}\|p_g)$ 相差常数，因此理想的内层判别器把生成器训练转化为最小化 JS 散度。
 
@@ -85,17 +86,17 @@ $$
 
 积分概率度量（IPM）用函数类 $\mathcal F$ 比较两个分布：
 
-$$
+```math
 D_{\mathcal F}(P,Q)
 =\sup_{f\in\mathcal F}\left|\mathbb E_P[f(x)]-\mathbb E_Q[f(x)]\right|.
-$$
+```
 
 Wasserstein-1 距离的原始形式是最优运输问题：
 
-$$
+```math
 W_1(P,Q)=\inf_{\gamma\in\Pi(P,Q)}
 \mathbb E_{(X,Y)\sim\gamma}[\lVert X-Y\rVert],
-$$
+```
 
 其中 $\Pi(P,Q)$ 是边缘分别为 $P,Q$ 的所有联合分布。新版课件第 104 页强调 $\gamma$ 本身是联合分布（或耦合测度），不是任意运输函数；存在密度时满足 $\int\gamma(x,y)dy=p(x)$、$\int\gamma(x,y)dx=q(y)$，并且非负、总质量为 1。它表示把一堆“土”从 $P$ 搬到 $Q$ 的最小平均运输成本。
 
@@ -103,10 +104,10 @@ $$
 
 Kantorovich-Rubinstein 对偶给出
 
-$$
+```math
 W_1(P,Q)=\sup_{\lVert f\rVert_L\le1}
 \left(\mathbb E_{x\sim P}f(x)-\mathbb E_{x\sim Q}f(x)\right),
-$$
+```
 
 其中 $f$ 是 1-Lipschitz 函数。这使距离可以由神经网络近似。
 
@@ -114,13 +115,13 @@ $$
 
 WGAN 的 critic $f_w$ 输出任意实数，不再是二分类概率：
 
-$$
+```math
 \min_G\max_{f_w\in\mathrm{Lip}_1}
 \left[
 \mathbb E_{x\sim p_{\text{data}}}f_w(x)
 -\mathbb E_{z\sim p(z)}f_w(G(z))
 \right].
-$$
+```
 
 ### 5.1 权重裁剪
 
@@ -130,17 +131,17 @@ $$
 
 可微的 1-Lipschitz 函数满足 $\lVert\nabla_x f(x)\rVert_2\le1$。WGAN-GP 在真实和生成样本间的插值点 $\hat x$ 上加入
 
-$$
+```math
 \lambda\,\mathbb E_{\hat x}
 \left(\lVert\nabla_{\hat x}f_w(\hat x)\rVert_2-1\right)^2.
-$$
+```
 
 若把 critic 写成最大化目标，应减去该惩罚；若把训练写成最小化损失，则加上惩罚。插值点常取
 
-$$
+```math
 \hat x=\epsilon x+(1-\epsilon)\tilde x,
 \quad \epsilon\sim\mathrm{Uniform}(0,1),
-$$
+```
 
 其中 $x$ 为真实样本，$\tilde x=G(z)$ 为生成样本。
 
