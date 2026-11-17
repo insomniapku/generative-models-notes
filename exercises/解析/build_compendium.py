@@ -28,7 +28,11 @@ for name in PARTS:
     # Shift all Markdown headings one level below the collection title.
     text = re.sub(r'^(#{1,5}) ', r'#\1 ', text, flags=re.M)
     pieces.append(text.rstrip() + '\n')
-(ROOT / '全题解析.md').write_text('\n\n'.join(pieces), encoding='utf-8')
+combined = ROOT / '全题解析.md'
+# A published checkout uses this file as a short navigation index. Rebuilding
+# the two volumes must not replace that index with an oversized online page.
+if not combined.exists() or '## 合订版分卷阅读' not in combined.read_text(encoding='utf-8'):
+    combined.write_text('\n\n'.join(pieces), encoding='utf-8')
 
 for filename, title, selected in [
     ('全题解析_作业卷.md', '生成模型基础全题解析 作业卷', PARTS[:5]),
