@@ -119,11 +119,32 @@
     "method": "三人情形穷举排列，对比运输矩阵代价与平均欧氏距离"
   },
   {
+    "name": "新增手算例子",
+    "passed": true,
+    "error": 1.1102230246251565e-16,
+    "tolerance": 1e-12,
+    "method": "核对两点 ELBO、在线 softmax、两步扩散、两响应最优策略及贪心匹配反例"
+  },
+  {
     "name": "58个原题作答单元覆盖",
     "passed": true,
     "error": 0.0,
     "tolerance": 0,
     "method": "按原 PDF 人工列出题号，再逐一检查相应标题是否存在；正文另经人工核对"
+  },
+  {
+    "name": "58个作答单元的原题",
+    "passed": true,
+    "error": 0.0,
+    "tolerance": 0,
+    "method": "逐小问检查 PDF 页码标记与原题段落，另人工核对共同条件和公式转写"
+  },
+  {
+    "name": "58个作答单元的详细解析",
+    "passed": true,
+    "error": 0.0,
+    "tolerance": 0,
+    "method": "逐小问检查展开推导、例子或进一步解释，姓名题保持直接作答"
   },
   {
     "name": "本地链接完整性",

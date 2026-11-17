@@ -6,19 +6,27 @@
       "units": [
         {
           "id": "第1题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第2题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         }
       ],
       "count": 4,
@@ -29,27 +37,39 @@
       "units": [
         {
           "id": "第1题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第1题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第2题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第2题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         }
       ],
       "count": 6,
@@ -60,23 +80,33 @@
       "units": [
         {
           "id": "第1题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第1题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第1题c",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第2题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         }
       ],
       "count": 5,
@@ -87,27 +117,39 @@
       "units": [
         {
           "id": "第1题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第1题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第2题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题c",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         }
       ],
       "count": 6,
@@ -118,31 +160,45 @@
       "units": [
         {
           "id": "第1题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第2题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题c",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         }
       ],
       "count": 7,
@@ -153,63 +209,93 @@
       "units": [
         {
           "id": "第1题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第1题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第1题c",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第1题d",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第2题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第2题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题c",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第5题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第5题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第5题c",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第5题d",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         }
       ],
       "count": 15,
@@ -220,63 +306,93 @@
       "units": [
         {
           "id": "第0题",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第1题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第1题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第1题c",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第2题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第2题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第3题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题bi",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题bii",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第4题biii",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第5题a",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第5题b",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         },
         {
           "id": "第5题c",
-          "present": true
+          "present": true,
+          "original_statement": true,
+          "detailed_explanation": true
         }
       ],
       "count": 15,

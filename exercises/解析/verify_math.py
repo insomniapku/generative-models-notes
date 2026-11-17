@@ -253,6 +253,30 @@ def transport():
            '三人情形穷举排列，对比运输矩阵代价与平均欧氏距离')
 
 
+def worked_examples():
+    joint = np.array([.2, .3]); q = np.array([.5, .5]); posterior = joint / joint.sum()
+    elbo = q @ np.log(joint / q)
+    gap = np.log(joint.sum()) - elbo
+    kl = q @ np.log(q / posterior)
+    block_mean = (10 + 2 * 20 + 3 * 30) / 6
+    online_mean = ((2 / 3) * 25 + 30) / ((2 / 3) * 1.5 + 1)
+    beta1, beta2 = .1, .2
+    variance = (1 - beta2) * beta1 + beta2
+    reference = np.array([.5, .5]); reward = np.array([0., np.log(3.)])
+    normalizer = np.sum(reference * np.exp(reward))
+    star = reference * np.exp(reward) / normalizer
+    value = star @ reward - star @ np.log(star / reference)
+    a = np.array([0., 3.]); b = np.array([2., 100.])
+    distances = np.abs(a[:, None] - b[None, :])
+    error = max(abs(gap - kl), abs(elbo + .7135581778200729),
+                abs(block_mean - online_mean), abs(variance - .28),
+                np.max(np.abs(star - [.25, .75])), abs(value - np.log(2)),
+                abs(distances[1, 0] + distances[0, 1] - 101),
+                abs(distances[0, 0] + distances[1, 1] - 99))
+    record('新增手算例子', error, 1e-12,
+           '核对两点 ELBO、在线 softmax、两步扩散、两响应最优策略及贪心匹配反例')
+
+
 def files_and_coverage():
     specs = [
         ('作业1_VAE_解析.md', ['第1题', '第2题', '第3题', '第4题']),
@@ -270,14 +294,32 @@ def files_and_coverage():
     coverage = []
     for name, units in specs:
         text = (ROOT / name).read_text(encoding='utf-8')
-        headings = re.findall(r'^#{2,3} (.+)$', text, re.M)
-        found = [bool(any(h.startswith(unit + ' ') for h in headings)) for unit in units]
-        coverage.append(dict(file=name, units=[dict(id=u, present=p) for u, p in zip(units, found)],
-                             count=len(units), all_present=all(found)))
+        headings = list(re.finditer(r'^(#{2,3}) (.+)$', text, re.M))
+        records = []
+        for unit in units:
+            selected = next((i for i, h in enumerate(headings) if h.group(2).startswith(unit + ' ')), None)
+            segment = ''
+            if selected is not None:
+                heading = headings[selected]
+                stop = len(text)
+                for following in headings[selected + 1:]:
+                    if len(following.group(1)) <= len(heading.group(1)):
+                        stop = following.start()
+                        break
+                segment = text[heading.end():stop]
+            records.append(dict(id=unit, present=selected is not None,
+                                original_statement='**原题（PDF第' in segment,
+                                detailed_explanation='**推导细节与进一步理解**' in segment))
+        coverage.append(dict(file=name, units=records, count=len(units),
+                             all_present=all(u['present'] for u in records)))
     (ROOT / 'coverage.json').write_text(json.dumps(dict(total=sum(x['count'] for x in coverage),
         files=coverage), ensure_ascii=False, indent=2), encoding='utf-8')
     record('58个原题作答单元覆盖', sum(not u['present'] for x in coverage for u in x['units']), 0,
            '按原 PDF 人工列出题号，再逐一检查相应标题是否存在；正文另经人工核对')
+    record('58个作答单元的原题', sum(not u['original_statement'] for x in coverage for u in x['units']), 0,
+           '逐小问检查 PDF 页码标记与原题段落，另人工核对共同条件和公式转写')
+    record('58个作答单元的详细解析', sum(not u['detailed_explanation'] for x in coverage for u in x['units']), 0,
+           '逐小问检查展开推导、例子或进一步解释，姓名题保持直接作答')
     broken = []
     unbalanced = []
     for path in ROOT.glob('*.md'):
@@ -324,7 +366,7 @@ def write_report():
 
 def main():
     gaussian_kl(); reparameterization(); gumbel_max(); rope(); online_attention()
-    gan(); diffusion(); flow(); normalization(); policy_gradient(); transport()
+    gan(); diffusion(); flow(); normalization(); policy_gradient(); transport(); worked_examples()
     # Write generated outputs before validating links to those outputs.
     write_report()
     files_and_coverage()
