@@ -33,7 +33,7 @@ where softmax is applied row-wise.
 p(x_{1:n})=\prod_{i=1}^n p(x_i\mid x_{1:i-1}).
 ```
 
-训练时整段序列都在内存中。若第 $`i`$ 行注意力可以读取 $`j>i`$ 的 $`K_j,V_j`$，其输出就可能包含 $`x_{i+1}`$，甚至更远处的信息。它在预测 $`x_{i+1}`$ 时看到了答案，造成未来信息泄漏；推理时这些未来 token 尚未生成，训练和推理的条件不一致。
+训练时整段序列都在内存中。若第 $`i`$ 行注意力可以读取 $`j\gt i`$ 的 $`K_j,V_j`$，其输出就可能包含 $`x_{i+1}`$，甚至更远处的信息。它在预测 $`x_{i+1}`$ 时看到了答案，造成未来信息泄漏；推理时这些未来 token 尚未生成，训练和推理的条件不一致。
 
 
 **推导细节与进一步理解**
@@ -53,7 +53,7 @@ p(x_{1:n})=\prod_{i=1}^n p(x_i\mid x_{1:i-1}).
 在 softmax **之前**加矩阵 $`M`$：
 
 ```math
-M_{ij}=\begin{cases}0,&j\leq i,\\-\infty,&j>i,\end{cases}\qquad
+M_{ij}=\begin{cases}0,&j\leq i,\\-\infty,&j\gt i,\end{cases}\qquad
 O=\mathrm{softmax}_{\rm row}\!\left(\frac{QK^\top}{\sqrt d}+M\right)V.
 ```
 
@@ -157,7 +157,7 @@ S=\frac{QK^\top}{\sqrt d},\qquad A=\mathrm{softmax}_{\rm row}(S),\qquad O=AV.
 
 **原题（PDF第1页）**
 
-Consider the standard, unscaled RoPE implementation with head dimension $`d=2h`$ and a fixed base $`b>1`$ (e.g., $`b=10000`$). Let $`\theta=(b^{-2\ell/d})_{\ell=0}^{h-1}\in\mathbb R^h`$. For one token at position $`t`$, split $`x\in\mathbb R^d`$ into its first and second halves $`x^{(1)},x^{(2)}\in\mathbb R^h`$ and define
+Consider the standard, unscaled RoPE implementation with head dimension $`d=2h`$ and a fixed base $`b\gt 1`$ (e.g., $`b=10000`$). Let $`\theta=(b^{-2\ell/d})_{\ell=0}^{h-1}\in\mathbb R^h`$. For one token at position $`t`$, split $`x\in\mathbb R^d`$ into its first and second halves $`x^{(1)},x^{(2)}\in\mathbb R^h`$ and define
 
 ```math
 x=\begin{pmatrix}x^{(1)}\\x^{(2)}\end{pmatrix},\qquad

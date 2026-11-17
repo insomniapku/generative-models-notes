@@ -81,7 +81,7 @@ p_\theta(z\mid x)=\frac{p(z)p_\theta(x\mid z)}{p_\theta(x)}.
 
 ```math
 \mathrm{ELBO}=\tfrac12\log(0.2/0.5)+\tfrac12\log(0.3/0.5)
-\approx-0.71356<\log0.5\approx-0.69315.
+\approx-0.71356\lt \log0.5\approx-0.69315.
 ```
 
 若改为真实后验 $`(0.4,0.6)`$，两个联合概率除以后验都等于 $`0.5`$，Jensen 中的随机量变为常数，ELBO 就等于 $`\log0.5`$。因此“后验近似越准确，下界越紧”指的是固定生成模型和固定观测时，后验 KL 越小。
@@ -262,7 +262,7 @@ Explain what is Gumbel-Max trick and prove it. Explain when and how to use Gumbe
 
 ### Gumbel Max 的结论
 
-设类别权重 $`w_i>0`$，概率 $`\pi_i=w_i/\sum_jw_j`$，且 $`g_i`$ 独立服从标准 Gumbel 分布，累积分布函数为 $`F(g)=\exp(-e^{-g})`$。则
+设类别权重 $`w_i\gt 0`$，概率 $`\pi_i=w_i/\sum_jw_j`$，且 $`g_i`$ 独立服从标准 Gumbel 分布，累积分布函数为 $`F(g)=\exp(-e^{-g})`$。则
 
 ```math
 \boxed{k=\arg\max_i(\log w_i+g_i)\quad\Longrightarrow\quad\Pr(k=i)=\pi_i.}
@@ -284,7 +284,7 @@ Explain what is Gumbel-Max trick and prove it. Explain when and how to use Gumbe
 \begin{aligned}
 \Pr(k=i)
 &=\int_0^\infty \underbrace{w_i e^{-w_it}}_{T_i\text{ 的密度}}
-\prod_{j\ne i}\underbrace{e^{-w_jt}}_{\Pr(T_j>t)}\,dt\\
+\prod_{j\ne i}\underbrace{e^{-w_jt}}_{\Pr(T_j\gt t)}\,dt\\
 &=w_i\int_0^\infty e^{-(\sum_jw_j)t}\,dt
 =\frac{w_i}{\sum_jw_j}.
 \end{aligned}
@@ -294,7 +294,7 @@ Explain what is Gumbel-Max trick and prove it. Explain when and how to use Gumbe
 
 ### 何时以及怎样使用 Gumbel Softmax
 
-神经网络需要从类别分布采样、并让梯度通过该离散选择时，可把不可导的 one hot 最大值选择替换为温度为 $`\tau>0`$ 的连续向量：
+神经网络需要从类别分布采样、并让梯度通过该离散选择时，可把不可导的 one hot 最大值选择替换为温度为 $`\tau\gt 0`$ 的连续向量：
 
 ```math
 \boxed{y_i=\frac{\exp((\log w_i+g_i)/\tau)}{\sum_j\exp((\log w_j+g_j)/\tau)}.}
@@ -319,10 +319,10 @@ Explain what is Gumbel-Max trick and prove it. Explain when and how to use Gumbe
 指数竞赛里用到的分布变换可补充为：对 $`t\ge0`$，
 
 ```math
-\Pr(E_i>t)=\Pr(-\log U_i>t)=\Pr(U_i<e^{-t})=e^{-t},
+\Pr(E_i\gt t)=\Pr(-\log U_i\gt t)=\Pr(U_i\lt e^{-t})=e^{-t},
 ```
 
-所以 $`E_i`$ 的确是率为 1 的指数变量；同理 $`\Pr(T_i>t)=e^{-w_it}`$。获胜概率积分中“自己的密度乘其他人的生存概率”，就是要求自己在 $`t`$ 时到达、其他所有类别都比 $`t`$ 晚。
+所以 $`E_i`$ 的确是率为 1 的指数变量；同理 $`\Pr(T_i\gt t)=e^{-w_it}`$。获胜概率积分中“自己的密度乘其他人的生存概率”，就是要求自己在 $`t`$ 时到达、其他所有类别都比 $`t`$ 晚。
 
 **Gumbel Softmax 的梯度并没有穿过 argmax。** 它把离散选择换成概率单纯形内部的向量，后续网络因而接收连续值。对同一个 Gumbel 样本，温度逐渐减小时最大分量占据的比例越来越大；由于连续噪声下最大值几乎必然唯一，极限才是 one hot。温度很小时，大部分样本已经饱和，少数接近平局的样本又可能有较大的 $`1/\tau`$ 因子，所以不能简单认为“温度越小梯度越好”。
 
