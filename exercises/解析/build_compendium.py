@@ -30,6 +30,20 @@ for name in PARTS:
     pieces.append(text.rstrip() + '\n')
 (ROOT / '全题解析.md').write_text('\n\n'.join(pieces), encoding='utf-8')
 
+for filename, title, selected in [
+    ('全题解析_作业卷.md', '生成模型基础全题解析 作业卷', PARTS[:5]),
+    ('全题解析_期中卷.md', '生成模型基础全题解析 期中卷', PARTS[5:7]),
+]:
+    sections = [f'# {title}\n\n每题包含 PDF 原文、条件、页码、中文详细解析及进一步推导。'
+                '本卷保留各分题文件的完整内容。\n\n'
+                '另见 [作业卷](全题解析_作业卷.md)、[期中卷](全题解析_期中卷.md)、'
+                '[GitHub资料与勘误](GitHub资料_解析与勘误.md)及[分题目录](README.md)。\n']
+    for name in selected:
+        text = (ROOT / name).read_text(encoding='utf-8')
+        text = re.sub(r'^(#{1,5}) ', r'#\1 ', text, flags=re.M)
+        sections.append(text.rstrip() + '\n')
+    (ROOT / filename).write_text('\n\n'.join(sections), encoding='utf-8')
+
 source_root = ROOT.parent / 'GitHub资料'
 manifest_path = source_root / 'downloads.json'
 manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
