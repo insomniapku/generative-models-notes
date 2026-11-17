@@ -1,0 +1,7 @@
+# Preserve downloaded originals exactly, including their existing line endings.
+exercises/GitHub资料/** -text
+
+# Keep authored study materials portable across Windows and Linux.
+exercises/解析/*.md text eol=lf
+exercises/解析/*.py text eol=lf
+exercises/解析/*.json text eol=lf
