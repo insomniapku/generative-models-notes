@@ -1,0 +1,149 @@
+[
+  {
+    "name": "一般高斯 KL",
+    "passed": true,
+    "error": 5.551115123125783e-17,
+    "tolerance": 1e-12,
+    "method": "三维 Gauss Hermite 求积直接积分 log q minus log p，与闭式公式比较"
+  },
+  {
+    "name": "log variance 重参数化梯度",
+    "passed": true,
+    "error": 7.187246353623777e-10,
+    "tolerance": 1e-07,
+    "method": "用四次函数精确高斯矩的有限差分，对照路径梯度的 Gauss Hermite 积分"
+  },
+  {
+    "name": "Gumbel Max 类别频率",
+    "passed": true,
+    "error": 0.0016466666666666574,
+    "tolerance": 0.004,
+    "method": "固定随机种子采样三十万次，与目标类别概率比较；频率检查不代替证明"
+  },
+  {
+    "name": "RoPE 相对旋转及符号",
+    "passed": true,
+    "error": 1.7763568394002505e-15,
+    "tolerance": 1e-12,
+    "method": "题目 rotate half 的逐元素实现，对比显式 M(i minus j) 块矩阵"
+  },
+  {
+    "name": "FlashAttention 在线归一化",
+    "passed": true,
+    "error": 8.881784197001252e-16,
+    "tolerance": 1e-12,
+    "method": "四元素分块累计与完整因果注意力直接 softmax 比较，含大幅度分数"
+  },
+  {
+    "name": "最优 GAN 与 JS",
+    "passed": true,
+    "error": 2.220446049250313e-16,
+    "tolerance": 1e-12,
+    "method": "直接代入最优判别器与独立计算 JS 的结果比较"
+  },
+  {
+    "name": "GAN 两种生成器损失导数",
+    "passed": true,
+    "error": 5.504252609256355e-11,
+    "tolerance": 1e-08,
+    "method": "对稳定 logit 损失有限差分，对照负 D 与 D minus 1"
+  },
+  {
+    "name": "DDPM 前向边缘",
+    "passed": true,
+    "error": 2.220446049250313e-16,
+    "tolerance": 1e-12,
+    "method": "逐步均值方差递推与累计信号公式比较，三十步日程"
+  },
+  {
+    "name": "扩散高斯后验",
+    "passed": true,
+    "error": 4.218847493575595e-15,
+    "tolerance": 1e-12,
+    "method": "独立构建二元高斯协方差，用通用条件高斯公式对照配方结果"
+  },
+  {
+    "name": "网上后验精度勘误反例",
+    "passed": true,
+    "error": 2.7755575615628914e-17,
+    "tolerance": 1e-12,
+    "method": "正确方差 0.153846154；漏乘系数后的错误方差 0.133333333，两者不同"
+  },
+  {
+    "name": "可逆 MLP 与 Jacobian",
+    "passed": true,
+    "error": 5.0748738544825756e-11,
+    "tolerance": 1e-08,
+    "method": "正逆复合与数值 Jacobian 行列式检查，激活为 sinh"
+  },
+  {
+    "name": "MAF 逆映射与 log determinant",
+    "passed": true,
+    "error": 1.7429391263590333e-12,
+    "tolerance": 1e-08,
+    "method": "真实顺序采样后取数值 Jacobian，与逆映射及对角积比较"
+  },
+  {
+    "name": "两年期中 LayerNorm",
+    "passed": true,
+    "error": 0.0,
+    "tolerance": 1e-12,
+    "method": "四个 token 沿各自特征维使用总体方差计算"
+  },
+  {
+    "name": "对数导数奖励梯度",
+    "passed": true,
+    "error": 7.57049978261648e-12,
+    "tolerance": 1e-08,
+    "method": "三类别 softmax 期望奖励有限差分，与 score function 梯度比较"
+  },
+  {
+    "name": "KL 正则策略恒等式",
+    "passed": true,
+    "error": 9.992007221626409e-16,
+    "tolerance": 1e-12,
+    "method": "遍历三类别单纯形网格，含边界零概率；每点比较两种目标写法"
+  },
+  {
+    "name": "常数奖励基线",
+    "passed": true,
+    "error": 0.0,
+    "tolerance": 1e-12,
+    "method": "Bernoulli theta 等于零时的两个样本，验证期望零与基线逐样本零"
+  },
+  {
+    "name": "最优运输与指派",
+    "passed": true,
+    "error": 2.220446049250313e-16,
+    "tolerance": 1e-12,
+    "method": "三人情形穷举排列，对比运输矩阵代价与平均欧氏距离"
+  },
+  {
+    "name": "58个原题作答单元覆盖",
+    "passed": true,
+    "error": 0.0,
+    "tolerance": 0,
+    "method": "按原 PDF 人工列出题号，再逐一检查相应标题是否存在；正文另经人工核对"
+  },
+  {
+    "name": "本地链接完整性",
+    "passed": true,
+    "error": 0.0,
+    "tolerance": 0,
+    "method": "检查全部 Markdown 文档的相对文件链接：[]"
+  },
+  {
+    "name": "块公式分隔符配对",
+    "passed": true,
+    "error": 0.0,
+    "tolerance": 0,
+    "method": "检查双美元分隔符和 Markdown 公式块均成对：[]"
+  },
+  {
+    "name": "GitHub 下载 SHA256",
+    "passed": true,
+    "error": 0.0,
+    "tolerance": 0,
+    "method": "逐一复算五份下载文件的内容哈希"
+  }
+]

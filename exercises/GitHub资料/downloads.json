@@ -1,0 +1,62 @@
+[
+  {
+    "repo": "joerunrun/generative_model",
+    "ref": "main",
+    "path": "README.md",
+    "url": "https://raw.githubusercontent.com/joerunrun/generative_model/main/README.md",
+    "local": "joerunrun__generative_model/README.md",
+    "bytes": 53,
+    "sha256": "d505d16eec2c35887dbfc37cfdc8fa46fee4e0f6832d9f95c1410ec8e57ae471",
+    "download_date": "2026-11-17",
+    "git_blob_sha1": "ce177647ccfe3c779efa5daeff416401c820a46e",
+    "repository_snapshot_sha": "83f1dcda1a1a1b7c8cd1867c80e58b0e32632468"
+  },
+  {
+    "repo": "joerunrun/generative_model",
+    "ref": "main",
+    "path": "midtest.pdf",
+    "url": "https://raw.githubusercontent.com/joerunrun/generative_model/main/midtest.pdf",
+    "local": "joerunrun__generative_model/midtest.pdf",
+    "bytes": 120360,
+    "sha256": "d6eb5fb973db097988d3825964261b2dd15cf53fabf3c3dd206f8ccf094dbe69",
+    "download_date": "2026-11-17",
+    "git_blob_sha1": "e025129d47890ef4f484825166185105153217a2",
+    "repository_snapshot_sha": "83f1dcda1a1a1b7c8cd1867c80e58b0e32632468"
+  },
+  {
+    "repo": "joerunrun/generative_model",
+    "ref": "main",
+    "path": "midtest.tex",
+    "url": "https://raw.githubusercontent.com/joerunrun/generative_model/main/midtest.tex",
+    "local": "joerunrun__generative_model/midtest.tex",
+    "bytes": 17420,
+    "sha256": "9f3b974c010baaabd9f43bd09f2f43a656200e66de9e4eefce0b5557aec6497e",
+    "download_date": "2026-11-17",
+    "git_blob_sha1": "47c1924176aa87b9ca0517f7e52d47193329eb25",
+    "repository_snapshot_sha": "83f1dcda1a1a1b7c8cd1867c80e58b0e32632468"
+  },
+  {
+    "repo": "TidalHarley/PKU-Genai-notes",
+    "ref": "main",
+    "path": "README.md",
+    "url": "https://raw.githubusercontent.com/TidalHarley/PKU-Genai-notes/main/README.md",
+    "local": "TidalHarley__PKU-Genai-notes/README.md",
+    "bytes": 115,
+    "sha256": "ab4c7e4792edd775cc4c46902b1b907fdde8dde1d229e67906a40c5e578e70d6",
+    "download_date": "2026-11-17",
+    "git_blob_sha1": "0e98f5a46c91a613f99e1f35d0b35661d50607de",
+    "repository_snapshot_sha": "47df72c040ac19ef87bb94cfacf845a0bbc408ce"
+  },
+  {
+    "repo": "TidalHarley/PKU-Genai-notes",
+    "ref": "main",
+    "path": "生成模型基础 Basic of Generative Model (25 Fall).pdf",
+    "url": "https://raw.githubusercontent.com/TidalHarley/PKU-Genai-notes/main/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80%20Basic%20of%20Generative%20Model%20%2825%20Fall%29.pdf",
+    "local": "TidalHarley__PKU-Genai-notes/生成模型基础 Basic of Generative Model (25 Fall).pdf",
+    "bytes": 12156592,
+    "sha256": "1959770a1aa73ea2953b752c8c5e22658f1e9738aa8293b16a909377aad8e83b",
+    "download_date": "2026-11-17",
+    "git_blob_sha1": "ee9ff21bc958484b3c3dc9b1aa57a77d16f7aa5a",
+    "repository_snapshot_sha": "47df72c040ac19ef87bb94cfacf845a0bbc408ce"
+  }
+]

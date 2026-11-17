@@ -1,0 +1,286 @@
+{
+  "total": 58,
+  "files": [
+    {
+      "file": "作业1_VAE_解析.md",
+      "units": [
+        {
+          "id": "第1题",
+          "present": true
+        },
+        {
+          "id": "第2题",
+          "present": true
+        },
+        {
+          "id": "第3题",
+          "present": true
+        },
+        {
+          "id": "第4题",
+          "present": true
+        }
+      ],
+      "count": 4,
+      "all_present": true
+    },
+    {
+      "file": "作业2_AR与Transformer_解析.md",
+      "units": [
+        {
+          "id": "第1题a",
+          "present": true
+        },
+        {
+          "id": "第1题b",
+          "present": true
+        },
+        {
+          "id": "第2题a",
+          "present": true
+        },
+        {
+          "id": "第2题b",
+          "present": true
+        },
+        {
+          "id": "第3题",
+          "present": true
+        },
+        {
+          "id": "第4题",
+          "present": true
+        }
+      ],
+      "count": 6,
+      "all_present": true
+    },
+    {
+      "file": "作业3_GAN_解析.md",
+      "units": [
+        {
+          "id": "第1题a",
+          "present": true
+        },
+        {
+          "id": "第1题b",
+          "present": true
+        },
+        {
+          "id": "第1题c",
+          "present": true
+        },
+        {
+          "id": "第2题",
+          "present": true
+        },
+        {
+          "id": "第3题",
+          "present": true
+        }
+      ],
+      "count": 5,
+      "all_present": true
+    },
+    {
+      "file": "作业4_扩散模型_解析.md",
+      "units": [
+        {
+          "id": "第1题a",
+          "present": true
+        },
+        {
+          "id": "第1题b",
+          "present": true
+        },
+        {
+          "id": "第2题",
+          "present": true
+        },
+        {
+          "id": "第3题a",
+          "present": true
+        },
+        {
+          "id": "第3题b",
+          "present": true
+        },
+        {
+          "id": "第3题c",
+          "present": true
+        }
+      ],
+      "count": 6,
+      "all_present": true
+    },
+    {
+      "file": "作业5_语言模型微调_解析.md",
+      "units": [
+        {
+          "id": "第1题",
+          "present": true
+        },
+        {
+          "id": "第2题",
+          "present": true
+        },
+        {
+          "id": "第3题a",
+          "present": true
+        },
+        {
+          "id": "第3题b",
+          "present": true
+        },
+        {
+          "id": "第3题c",
+          "present": true
+        },
+        {
+          "id": "第4题a",
+          "present": true
+        },
+        {
+          "id": "第4题b",
+          "present": true
+        }
+      ],
+      "count": 7,
+      "all_present": true
+    },
+    {
+      "file": "期中2024_逐题解析.md",
+      "units": [
+        {
+          "id": "第1题a",
+          "present": true
+        },
+        {
+          "id": "第1题b",
+          "present": true
+        },
+        {
+          "id": "第1题c",
+          "present": true
+        },
+        {
+          "id": "第1题d",
+          "present": true
+        },
+        {
+          "id": "第2题a",
+          "present": true
+        },
+        {
+          "id": "第2题b",
+          "present": true
+        },
+        {
+          "id": "第3题a",
+          "present": true
+        },
+        {
+          "id": "第3题b",
+          "present": true
+        },
+        {
+          "id": "第4题a",
+          "present": true
+        },
+        {
+          "id": "第4题b",
+          "present": true
+        },
+        {
+          "id": "第4题c",
+          "present": true
+        },
+        {
+          "id": "第5题a",
+          "present": true
+        },
+        {
+          "id": "第5题b",
+          "present": true
+        },
+        {
+          "id": "第5题c",
+          "present": true
+        },
+        {
+          "id": "第5题d",
+          "present": true
+        }
+      ],
+      "count": 15,
+      "all_present": true
+    },
+    {
+      "file": "期中2025_逐题解析.md",
+      "units": [
+        {
+          "id": "第0题",
+          "present": true
+        },
+        {
+          "id": "第1题a",
+          "present": true
+        },
+        {
+          "id": "第1题b",
+          "present": true
+        },
+        {
+          "id": "第1题c",
+          "present": true
+        },
+        {
+          "id": "第2题a",
+          "present": true
+        },
+        {
+          "id": "第2题b",
+          "present": true
+        },
+        {
+          "id": "第3题a",
+          "present": true
+        },
+        {
+          "id": "第3题b",
+          "present": true
+        },
+        {
+          "id": "第4题a",
+          "present": true
+        },
+        {
+          "id": "第4题bi",
+          "present": true
+        },
+        {
+          "id": "第4题bii",
+          "present": true
+        },
+        {
+          "id": "第4题biii",
+          "present": true
+        },
+        {
+          "id": "第5题a",
+          "present": true
+        },
+        {
+          "id": "第5题b",
+          "present": true
+        },
+        {
+          "id": "第5题c",
+          "present": true
+        }
+      ],
+      "count": 15,
+      "all_present": true
+    }
+  ]
+}

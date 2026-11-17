@@ -2,5 +2,10 @@ _work/
 *.pdf
 *.ppt
 *.pptx
+# Exercise sheets and explicitly archived public reference PDFs.
+!exercises/*.pdf
+!exercises/GitHub资料/**/*.pdf
+__pycache__/
+*.pyc
 .DS_Store
 Thumbs.db
